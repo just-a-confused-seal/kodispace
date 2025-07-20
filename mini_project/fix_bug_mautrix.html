@@ -1,0 +1,422 @@
+<html>
+    <head>
+        <title>
+            Kodi Space - Mini Website Portal 
+        </title>
+        <style>
+            body {
+                font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;;
+                margin: 0;
+                background-color: #f4f4f4;
+            }
+
+            .navbar {
+                overflow: hidden;
+                background-color: #000000;
+            }
+
+            .navbar a,
+            .navbar img {
+                float: left;
+                display: block;
+                padding: 14px 16px;
+            }
+
+            .navbar a {
+                font-size: 30px;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+            }
+
+            .navbar p {
+                font-size: 20px;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                margin: 0;
+            }
+
+            .navbar img {
+                width: 40px;
+                height: 40px;
+                padding: 10px 16px;
+            }
+
+            .navbar a:hover {
+                background-color: red;
+            }
+
+            /* Table styling */
+            table {
+                width: auto;
+                border-collapse: collapse;
+                margin-top: 20px;
+                margin-left: 20px;
+            }
+
+            table td {
+                font-size: 18px;
+                background-color: white;
+                border: 2px solid #999;
+                padding: 15px 20px; /* very small padding */
+            }
+
+            table td + td {
+                margin-left: 0;
+            }
+
+            .wide-table {
+                width: 98%;
+                border-collapse: collapse;
+                margin: 20px auto;
+            }
+
+            .table-box{
+                margin: 0px;
+            }
+
+            .td-box {
+                border: 1px solid #333;
+                border-radius: 15px;
+                padding: 5px 10px;
+                margin-right: 10px;
+                background-color: #f9f9f9;
+                display: inline-block;
+                font-size: 14px;
+            }
+
+            .collapsible {
+                background-color: white;
+                width: 100%;
+                border: none;
+                text-align: left;
+                outline: none;
+                font-size: 20px;
+                font-weight : bold ;
+                font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;;
+            }
+
+            .content {
+                display: none;
+                overflow: hidden;
+            }
+
+            .center {
+                display: block;
+                margin-right: auto;
+                padding: 15px 10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <img src="../images/logo.webp" alt="Logo">
+            <a href="javascript:history.back()">~# KODI SPACE</a>
+            <p> ---------------------{  Never do rm -rf / in production  }--------------------- </p>
+        </div>
+
+        <table>
+            <tr><td>kodi@kodi-Github-IO:~$ cat Mini Project/fix_bug_mautrix.html</td></tr>
+        </table>
+        <!-- Table Section -->
+        <table class="wide-table">
+            <tr>
+                <td>
+                    <img src="image/beeper.png" width="100px" height="100px">
+                    <h1> Fixing Bug in Mautrix Linkedin </h1>
+                    <table class="table-box">
+                        <td class="td-box">
+                            #Golang
+                        </td>
+                        <td class="td-box">
+                            #Reverse Engineering
+                        </td>
+                    </table>
+                    <p>
+                        Got some rare and interesting oppurtinity to help Beeper team to fix bugs in one of their application chat. This post will show how to trace, debug and apply fix to new mautrix linkedin that was built by golang programming language.
+                    </p>
+                    <p>
+                        For anyone who doesn't know about Beeper, it's an application chat that was able to integrate several common chat like line, linkedin chat, whatsapp, telegram and signal into one platform. For the full list you can check their <a href="https://www.beeper.com/">official website</a> and try it by yourself. 
+                    </p>
+
+                </td>
+            </tr>
+        </table>
+
+        <table class="wide-table">
+            <tr>
+                <td>
+                        <button type="button" class="collapsible">What is the Bug ?</button>
+                        <div class="content">
+                            <p>The bug itself is very simple, it related to viewing and attaching media in beeper linkedin chat. Let's break it down into several points:</p>
+                            <ul>
+                                <li>
+                                    If user from linkedin chat send video attachment and the attached video is view through Beeper chat, it will show "unsupported media type VIDEO" (BUG #1); 
+                                </li>
+                                <img src="image/bug1.png" width="800" height="400" class="center">
+                                <li>
+                                    If user send a video attachment from Beeper chat and the attached video is view through linkedin chat it will show as file attachment not as a video that can be previewed through browser (BUG #2).
+                                </li>
+                                <img src="image/bug2.png" width="800" height="300" class="center">
+                                
+                            </ul>
+                        </div>
+                </td>
+            </tr>
+        </table>
+
+        <table class="wide-table">
+            <tr>
+                <td>
+                    
+                        <button type="button" class="collapsible">Setup the Testing Environment !</button>
+                        <div class="content">
+                            <p>For testing Environmenr Ubuntu server - 22.04.5 will be prepared and running inside a virtualbox. Next, is to install bridge manager and mautrix linkedin. As the name suggest bridge manager is the one who taking care receiving and forwarding communication between different chat platform, while mautrix is the protocol used by the bridge manager to handle linkedin chat. User required to install this two components to debug and develop patch. </p>
+
+                            <p> Lets install all the necessary library: </p>
+                            <ul>
+                                <dt>~# sudo apt install golang-go </dt>
+                                <dt>~# sudo apt install ffmpeg</dt>
+                                <dt>~# sudo apt install libolm-dev</dt>
+                            </ul>
+                            <p> For golang: (make sure go version is higher than 1.23)</p>
+
+                            <p> Clone the official github for the bridge manager: </p>
+                            <ul>
+                                <dt>~# git clone  https://github.com/beeper/bridge-manager</dt>
+                            </ul>
+                            <p>Once it's done go to the folder and user can build the bridge manager program using the build.sh script like this:</p>
+                            <ul>
+                                <dt>~# cd bridge-manager</dt>
+                                <dt>~# bash build.sh</dt>
+                            </ul>
+                            <img src="image/build_bbctl.png" width="800" height="400" class="center">
+                            <img src="image/bbctl_binary.png" width="800" height="70" class="center">
+                            <p> After the script finish executing, bbctl binary should be inside the folder. Next step is to connect the bridge manager with the user beeper account to do this user need to download beeper chat from application store, register and login to its account.</p>
+
+                            <p>Also don't forget to connect the beeper chat to the linkedin account.</p>
+
+                            <p> If the beeper account is ready and connected to linkedin chat, lets connect it!</p>
+                            <img src="image/bbctl_login.png" width="400" height="70" class="center">
+                            <p> Once connected user can check if the integration successfull like this: </p>
+                            <img src="image/check_bbctl.png" width="800" height="150" class="center">
+
+                            <p> Bridge-manager is ready, its time to move on to mautrix linkedin. First step is to clone official github repository: </p>
+                            <ul>
+                                <dt>~# git clone https://github.com/mautrix/linkedin.git </dt>
+                            </ul> 
+                            <p>Go inside the clone folder and change the permission of the script using chmod </p> 
+                            <ul>
+                                <dt>~# cd linkedin </dt>
+                                <dt>~# chmod +x build.sh</dt>
+                                <dt>~# bash build.sh</dt>
+                            </ul> 
+                            <p>BTW it is recommended to put the clone folder of mautrix linkedin into bridge manager folder.Next is to execute the bbctl inside mautrix linkedin folder and you have to add some parameter like this:</p>
+                            <img src="image/execute_bbctl.png" width="800" height="500" class="center">
+                            <p>Don't forget to put --local-dev and sh-linkedin as its parameter to guide the bbctl to use local source code in the cloned github and the only feature that user want to test is linkedin.</p>
+
+                            <p>Next is to connect to the bridge bot! so user can integrate the previous running bridge-linkedin to our account in beeper chat, to do this user need to start a chat with @sh-<bridge>bot:beeper.local, like this:</p>
+
+                            <img src="image/bbctl_ex.png" width="450" height="300" class="center">
+                            <img src="image/bbctl_ex2.png" width="480" height="300" class="center">
+                            <img src="image/bbctl_ex3.png" width="580" height="300" class="center">
+
+                            <p>The UI may differ at the time user reading this post, thus, user need to look for this feature on their own if using the newer version of beeper.</p>
+
+                            <img src="image/bridge_bot.png" width="800" height="300" class="center">
+
+                            <p>Finally user can log in the connected bridge bot to its own linkedin chat. User can send "login" to show what information need to supplied to the bot. As user can see on the instruction, user need to provide CURL command from dev tool or JSON contains cookies. We are going to proceed with the CURL command, just to be clear the instructions expect you to provide one of the CURL commands “right after” you login to your account but as you can see if you open devtools “network” it has a lot of queries, so which one?</p>
+
+                            <img src="image/network_inspection.png" width="800" height="250" class="center">
+
+                            <p>You can filter the URL with “graphql” and copy the one that has memberidentity in the variables parameter. Paste it to the bot and you will successfully login. Notice that right after you paste the CURL command, it is immediately deleted. You can check for further validation using 'list-logins' command. </p>
+
+                            <img src="image/bot_valid.png" width="800" height="400" class="center">
+
+                            <p>Note: once you run a bridge-manager it will automatically make a duplicate chat from your existing chat on linkedin. So if you deploy a fix it will affect the copied chat not the original one since the copied chat follows the local bridge-manager.</p>
+
+                            <img src="image/bot_chat.png" width="800" height="200" class="center">
+
+                        </div>
+                    
+                </td>
+            </tr>
+        </table>
+
+        <table class="wide-table">
+            <tr>
+                <td>
+                    
+                        <button type="button" class="collapsible">What is the cause of the BUG #1?</button>
+                        <div class="content">
+                            <p>Let's try to dissect whats the cause of the 1st bug by looking at the logic enforce by linkedin chat using burpsuite:
+                                <ul>
+                                    <dt>Easy enough when user want to see the video attachment through chat it will contact and get the conversation through voyagerMessagingGraphQL endpoint that return two URL which are the preview picture of the uploaded video and link where video can be streamed.</dt>
+                                    <img src="image/preview.png" width="450" height="300" class="center">
+                                </ul>
+                            </p>
+
+                            <p>As mentioned in the previous section the bug is caused when the user uploads video from linkedin platform but somehow when beeper tries to sync the files in linkedin platform, it cannot process the request causing the error in the chat.</p>
+                            <p>Looking at the bridge-manager logs, it shows that there is an error 401 from beeper when try to fetch the preview image:</p>
+                            <img src="image/preview_error.png" width="800" height="120" class="center">
+                            <p>
+                                It happens when contacting URL video preview pictures. Let's try to copy the contacted URL and visit this through the browser. Note: make sure the browser that you used is also login with the same user that you logged in bridge-bot. As user can see it throws error 401 like this:
+                            </p>
+                            <img src="image/browser_401.png" width="800" height="400" class="center">
+                            <p>So what happens? In a glance it seems the URL is correct with the one we saw earlier. Let's try to compare it with the one that we got from burpsuite and bridge-manager log.</p>
+                            <p>
+                            Burpsuite:
+                            <b>https://www.linkedin.com/dms/prv/image/v2/D5623AQHZA9RMj-qJkg/videocover-high-private/B56ZZEAhYyGUAg-/0/1744897710960?m=AQI92Eljluo3MAAAAZZEA8vXo-nt-rBJfH23uFWDj_ghMhqDSguhnwq_aQ&ne=1&v=beta&t=BbDh3NPxiWxj-FtkoAZ_dm1IGb5cE0j1Vx7rq9OXCWI</b>
+                            </p>
+                            <p>
+                            Bridge-manager log:
+                            <b>https://www.linkedin.com/dms/prv/image/v2/D5623AQHZA9RMj-qJkg/videocover-high-private/B56ZZEAhYyGUAg-/0/1744897710960?m=AQI92Eljluo3MAAAAZZEA8vXo-nt-rBJfH23uFWDj_ghMhqDSguhnwq_aQ&ne=1&t=BbDh3NPxiWxj-FtkoAZ_dm1IGb5cE0j1Vx7rq9OXCWI&v=beta</b>
+                            </p>
+                            <p>The difference is subtle but the order of the parameter is wrong. The one from the linkedin platform had the v=beta parameter at the middle while the one that got from bridge-manager is at the end. Fixing the order allow us to visit the video preview image, like this:</p>
+                            <img src="image/preview_fix.png" width="750" height="400" class="center">
+
+                        </div>
+                    
+                </td>
+            </tr>
+        </table>
+
+        <table class="wide-table">
+            <tr>
+                <td>
+                    
+                        <button type="button" class="collapsible">What is the cause of the BUG #2?</button>
+                        <div class="content">
+                            <p>Let's try to dissect whats the cause of the 2nd bug by looking at the logic enforce by linkedin chat using burpsuite again:
+                                <ul>
+                                    <dt>When user try to upload a video the first endpoint that will contact is voyagerVideoDashMediaUploadMetadata that used to upload the metadata of the video file like type of media, file size and file name.</dt>
+                                    <img src="image/voyagerVideoDashMediaUploadMetadata.png" width="800" height="300" class="center">
+                                    <dt>Once the metadata is uploaded it will used the URL from the previous response which is "singleUploadUrl" to upload the actual video file.</dt>
+                                    <img src="image/uploadurl.png" width="800" height="300" class="center">
+                                    <dt>After upload the file linkedin will finalize the upload by sending message that contains the URL to stream the uploaded video file</dt>
+                                    <img src="image/finish_upload.png" width="800" height="300" class="center">
+                                </ul>
+                            </p>
+                            <p>The following is the comparison between original request from linkedin and request generated from beeper when sending video, respectively. As user can see the request from beeper is missing several parameters like streamingLocations and progressiveStreams. Lets move to the source code to find the one who sent the request, a quick analysis led us to HandleMatrixMessage() function that is trigger when send message from beeper.
+                            </p>
+                            <img src="image/comparison.png" width="800" height="300" class="center">
+                            <p>The one inside the red rectangle is responsible for handling attachment sent to linkedin chat as you can see the code check if the message is media it will check whether it is a photo attachment or not. If not photo attachment it will use type from linkedingo.MediaUploadTypeFileAttachment which is constant define as below:</p>
+                            <img src="image/define.png" width="800" height="150" class="center">
+                            <p>Before user can upload the actual video file, user have to send a request into URL voyagerVideoDashMediaUploadMetadata and we can see there is parameter called mediaUploadType and when user upload a video file the value need to be MESSAGING_VIDEO_ATTACHMENT not MESSAGING_FILE_ATTACHMENT. </p>
+                            <img src="image/implementation.png" width="800" height="500" class="center">
+                            <p>Further analysis to the HandleMatrixMessage() function shows that there is no logic that handles video attachment so every file you submit will be regarded as a file attachment. So the following bug is not really a bug but rather the functionality does not exist to handle submission of video attachment from the program. </p>
+                        </div>
+                    
+                </td>
+            </tr>
+        </table>
+
+        <table class="wide-table">
+            <tr>
+                <td>
+                    
+                        <button type="button" class="collapsible">Let's fix the BUG #1!</button>
+                        <div class="content">
+                            <p>So now that the issue has been addressed, next is to find the cause of the bug. After hours doing SAST to the source code, the analysis lead to DoRaw() function:</p>
+                            <img src="image/doraw.png" width="600" height="500" class="center">
+                            <p>Above figure show some quick description on what each code section functionality, the author first guess for the one that is responsible for changing the URL order is the .Encode() function from net library golang. To test this idea and fmt.Println will be placed before Encode() function is called.</p>
+
+                            <img src="image/println.png" width="800" height="100" class="center">
+                            
+                            <p>As the result shown it has the correct order before encoded but after passed to .Encode() function it changes to at the end of URL. Looking at the .Encode() function on golang <a href="https://pkg.go.dev/net/url#Values.Encode">documentation</a> it is assure that the function did change the order because by default it is sorted by the key parameter.</p>
+
+                            <p>Fun fact: Similar issue has been raised <a href="https://github.com/golang/go/issues/29985">at this link</a> but nothing can be done LOL!</p>
+
+                            <img src="image/patch.png" width="800" height="350" class="center">
+                            <p>After several trial and error the following is the implementation of the fix and the logic is pretty simple. User only need to make sure that if there is parameter "v" in the url don't passed it to the encode function.</p>
+
+                            <img src="image/fix.png" width="650" height="400" class="center">
+                            <p>Simple and clean!</p>
+                        </div>
+                    
+                </td>
+            </tr>
+        </table>
+
+        <table class="wide-table">
+            <tr>
+                <td>
+                    
+                        <button type="button" class="collapsible">Let's fix the BUG #2!</button>
+                        <div class="content">
+                            <p>The first thing user need to do is define a new struct for video attachment at linkedin/messages.go that follows the linkedin structure. </p>
+                            <img src="image/struct.png" width="800" height="700" class="center">
+                            <p>The following data struct will accommodate the following JSON:</p>
+                            <p>{"message":{"body":{"attributes":[],"text":""},"renderContentUnions":[{"video":{"media":"urn:li:digitalmediaAsset:D5623AQHP5blkLRNmHg","thumbnail":{"artifacts":[{"width":0,"height":0}],"rootUrl":""},"trackingId":"urn:li:digitalmediaAsset:D5623AQHP5blkLRNmHg","progressiveStreams":[{"bitRate":0,"height":0,"mediaType":"video/mp4","size":235800,"width":0,"streamingLocations":[{"url":"blob:https://www.linkedin.com/d3c42c78-f42e-4732-8fbf-c84ff81fb58e"}]}]}}],"conversationUrn":"urn:li:msg_conversation:(urn:li:fsd_profile:ACoAAB-NVOUBfblG42S8xvNDUOttze5ZdcP4mfs,2-M2FmZGNiNmMtOTExMS00NTM5LWIzNDYtNTUwZGM4YTEyZmJjXzAxMw==)","originToken":"63b8a871-b19a-41e2-9088-265d2d272784"},"mailboxUrn":"urn:li:fsd_profile:ACoAAB-NVOUBfblG42S8xvNDUOttze5ZdcP4mfs","trackingId":"c¸¨q±Aâ&]-''","dedupeByClientGeneratedToken":false}</p>
+                            <p>The user also need to add new constant to adjust with the value of video attachment from linkedin:</p>
+                            <img src="image/constant.png" width="800" height="120" class="center">
+                            <p>Next is to add new logic to the HandleMatrixMessage(). At the first red rectangle user initialize each struct that user have defined earlier. Second is to assign the “MESSAGING_VIDEO_ATTACHMENT” to attachmentType if the file MIME type is video/mp4. After the program successfully retrieves the correct URN, user can move to assembling the data struct of video attachment to voyagerVideoDashMediaUploadMetadata.</p>
+                            <img src="image/add_logic.png" width="800" height="250" class="center">
+                            <p>Rest is just assembling the value to each key of the data struct and most of them have already been provided in the code. The only thing we need to supply to the endpoint is a random uuidv4 this will be used as a value for urls of streamingLocations.</p>
+                            <img src="image/patch2.png" width="800" height="700" class="center">
+                            <p>Now lets try run the program but wait what happen it still throw error! Let’s look again to the log bridge manager, in the log user managed to upload to voyagerVideoDashMediaUploadMetadata using the new data struct and It returned 200 OK responses from linkedin but somehow when user tried to upload the actual video file to dms-uploads the linkedin threw 500 responses.</p>
+                            <img src="image/error.png" width="800" height="200" class="center">
+                            <p>The cause of the error is the problem of the existence of “Transfer-Encoding: chunked” and absence of “Content-Length” at the header so somehow the program changes the format of the header when uploading the file. This is the screenshot of the before and after the request is sent:</p>
+                            <img src="image/compare.png" width="800" height="400" class="center">
+                            <p>As you can see before sending the request the header Content-Length does exist in the header but it was removed after sending the request. So why is “content-length” gone? At this stage the author still don’t know the exact answer, the authori just assume that Golang ignore some of the fields, So the program need to set the content-length header another way. The code is pretty simple it needs to set the content through req object and convert the size value into Int64 using strconv.ParseInt().</p>
+                            <img src="image/patch3.png" width="800" height="500" class="center">
+                            <p>Using this method the bug is fixed and beeper chat can send video to linkedin chat:</p>
+                            <img src="image/fix_2.png" width="600" height="500" class="center">
+                        </div>
+                    
+                </td>
+            </tr>
+        </table>
+
+        <table class="wide-table">
+            <tr>
+                <td>
+                    
+                        <button type="button" class="collapsible">Additional Check</button>
+                        <div class="content">
+                            <p>The author do a pull request and it turns out there is a pre-check that the code has to go through before it can be merged to the main github.</p>
+                            <img src="image/gh_error.png" width="800" height="500" class="center">
+
+                            <p>Mautrix-linkedin has pre-commit-config.yaml file that use the following check:</p>
+                            <img src="image/lint.png" width="800" height="600" class="center">
+
+                            <p>Looking at the issue on the merge there are 4 things need to be fixed:</p>
+                            <ul>
+                                <dt>Trailing whitespace</dt>
+                                <dt>Import format</dt>
+                                <dt>Bad syntax for struct tag value at pkg/linkedingo/messages.go</dt>
+                                <dt>Literal http method at pkg/linkedingo/request.go </dt>
+                            </ul>
+                            <p>The first two issues can be solved using pre pre-check but the last two it needs to fix it manually. For bad syntax for struct tag the authori forgot to put “ when defining it:</p>
+                            <img src="image/bad_syntax.png" width="800" height="400" class="center">
+
+                            <p>For literal http method its better to used static value from golang library:</p>
+                            <img src="image/http_method.png" width="800" height="300" class="center">
+                            <p>Running the pre check give us the following result and the error is no more.</p>
+                            <img src="image/finish.png" width="800" height="300" class="center">
+                        </div>
+                    
+                </td>
+            </tr>
+        </table>
+
+    <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                content.style.display = "none";
+                } else {
+                content.style.display = "block";
+                }
+            });
+            }
+    </script>
+    </body>
+</html>
